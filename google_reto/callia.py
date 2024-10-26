@@ -9,7 +9,6 @@ import google.generativeai as genai
 from load_creds import load_creds
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
-
 # Ensure pydub finds FFmpeg
 AudioSegment.converter = (
     "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"
@@ -113,8 +112,13 @@ def generateSTT(filename, chat_session):
     count = 1
     transcripts = []
 
+<<<<<<< Updated upstream
     # print("Press SPACE to start recordings")
     # keyboard.wait("space")
+=======
+    #print("Press SPACE to start recordings")
+    #keyboard.wait("space")
+>>>>>>> Stashed changes
     print("Recording... Press SPACE again to stop.")
     time.sleep(0.2)
 
@@ -141,6 +145,10 @@ def generateSTT(filename, chat_session):
             },
         )
         scam_value = int(response.text) if int(response.text) <= 100 else 100
+
+        with open("scam_values.txt", "w") as scam_file:
+            scam_file.write(f"{scam_value} {scam_value_counter}\n")
+            
         print(f"Scam Value: {scam_value}")
         if scam_value >= 80:  # scam value threshhold
             scam_value_counter += 1
@@ -152,6 +160,7 @@ def generateSTT(filename, chat_session):
         # Guardar la respuesta en un archivo o imprimirla
         with open("call_log.txt", "w") as f:
             f.write(f"{text}. ")
+
 
     while True:
         try:
@@ -192,6 +201,7 @@ def generateSTT(filename, chat_session):
 
     return transcripts
 
+<<<<<<< Updated upstream
 
 def main():
     chat_session = model.start_chat(history=[])
@@ -201,3 +211,14 @@ def main():
 
 if __name__ == "__main__":
     main()
+=======
+#def main():
+#    chat_session = model.start_chat(history=[])
+#    # chat_session.send_message(pre_text)
+#    generateSTT("ESTE_BANQUITO", chat_session)
+#
+#
+#
+#if __name__ == "__main__":
+#    main()
+>>>>>>> Stashed changes

@@ -1,8 +1,24 @@
 from tkinter import *
 from PIL import Image, ImageTk
 
-def obtener_probabilidad():
-    return 50  # Simulación de una probabilidad de estafa
+def leerScamValues():
+    try:
+        with open("scam_values.txt", "r") as file:
+            line = file.readline().strip()  # Leer la primera línea y quitar espacios en blanco
+            values = line.split()  # Separar la línea en una lista por espacios
+            
+            # Asegurarse de que se han leído exactamente dos valores
+            if len(values) == 2:
+                return int(values[0]), int(values[1])  # Convertir a enteros y devolver
+            else:
+                print("El archivo no contiene exactamente dos valores.")
+                return None, None
+    except FileNotFoundError:
+        print("El archivo 'scam_values.txt' no fue encontrado.")
+        return None, None
+    except ValueError:
+        print("Error al convertir los valores a enteros.")
+        return None, None
 
 def aceptar_llamada(v_main):
     v_main.title("Llamada en curso")
@@ -26,8 +42,9 @@ def aceptar_llamada(v_main):
     rect_id = canvas.create_rectangle(0, rect_top, 300, rect_top + rect_height, fill="red", outline="")  # Color inicial
 
     # Función para actualizar la probabilidad
-    def actualizar_probabilidad():
-        probabilidad = obtener_probabilidad()  # Obtener la probabilidad
+    def actualizar_probabilidad(v_main):
+        scamVal, scamCount = leerScamValues()
+        probabilidad = scamVal # Obtener la probabilidad
 
         # Solo actualizar si hay una probabilidad válida
         if probabilidad is not None:
@@ -45,11 +62,18 @@ def aceptar_llamada(v_main):
             canvas.itemconfig(probabilidad_text_id, text="Probabilidad de estafa: No disponible")
             canvas.itemconfig(rect_id, fill="gray")  # Color por defecto si no hay datos
 
+        
+        try:
+            if(scamCount > 2):
+                rechazar_llamada(v_main)
+        except:
+            pass
+
         # Llamar a esta función cada 15 segundos
-        canvas.after(15000, actualizar_probabilidad)
+        canvas.after(5000,  lambda: actualizar_probabilidad(v_main))
 
     # Llamar a la función de actualización de probabilidad al inicio
-    actualizar_probabilidad()
+    actualizar_probabilidad(v_main)
 
     canvas.call_counter = 0
     call_counter_text = canvas.create_text(150, 130, text="00:00", fill="white", font=("Arial", 12))
@@ -73,4 +97,7 @@ def aceptar_llamada(v_main):
 
 # Función que muestra el mensaje de llamada rechazada en la misma ventana
 def rechazar_llamada(v_main):
+    with open("scam_values.txt", "w") as scam_file:
+            scam_file.write(f"")
     v_main.destroy()  # Elimina la ventana original
+    

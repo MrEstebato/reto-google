@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 import funciones as func
 import os
 import threading
+import callia
 
 # Crear la ventana principal
 v_main = Tk()
@@ -40,7 +41,10 @@ reject_button = canvas.create_image(80, 500, image=reject_photo)
 
 # Define the function to start the external script
 def start_call_script():
-    os.system("python callia.py")
+    #os.system("python callia.py")
+    chat_session = callia.model.start_chat(history=[])
+    # chat_session.send_message(pre_text)
+    callia.generateSTT("ESTE_BANQUITO", chat_session)
     v_main.quit()  # Close the main Tkinter window once the thread ends
 
 # Function to handle button clicks
