@@ -9,6 +9,7 @@ from io import BytesIO
 from pydub.playback import play
 import google.generativeai as genai
 import json
+import google.generativeai as genai
 
 # Ensure pydub finds FFmpeg
 AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
@@ -81,7 +82,7 @@ def generateAudioSample(filename):
     print(f"Audio saved as {mp3_filename}")
 
 
-def compareAudiotoTxt(file_name):
+def transcribeAudioToTxt(file_name):
 
     client = speech.SpeechClient.from_service_account_file("key.json")
 
@@ -106,7 +107,7 @@ def compareAudiotoTxt(file_name):
     return " ".join(transcripts)
 
 
-def generateSTT(filename):
+def generateSTT(filename, chat_session):
     count = 1
     transcripts = []
 
@@ -116,9 +117,12 @@ def generateSTT(filename):
     time.sleep(0.2)
 
     def process_audio(audio_filename):
-        text = compareAudiotoTxt(audio_filename)
+        text = transcribeAudioToTxt(audio_filename)
         transcripts.append(text)
         print(f"Transcript for {audio_filename}: {text}")
+        with open("response.json", "w") as f:
+            response = chat_session.send_message(text)
+            f.write(response.text)
 
     while True:
         try:
@@ -158,7 +162,7 @@ def generateSTT(filename):
 
 def main():
     chat_session = model.start_chat(history=[])
-    generateSTT("ESTE_BANQUITO")
+    generateSTT("ESTE_BANQUITO", chat_session)
 
 
 if __name__ == "__main__":
