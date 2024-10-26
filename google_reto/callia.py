@@ -112,13 +112,8 @@ def generateSTT(filename, chat_session):
     count = 1
     transcripts = []
 
-<<<<<<< Updated upstream
     # print("Press SPACE to start recordings")
     # keyboard.wait("space")
-=======
-    #print("Press SPACE to start recordings")
-    #keyboard.wait("space")
->>>>>>> Stashed changes
     print("Recording... Press SPACE again to stop.")
     time.sleep(0.2)
 
@@ -201,7 +196,6 @@ def generateSTT(filename, chat_session):
 
     return transcripts
 
-<<<<<<< Updated upstream
 
 def main():
     chat_session = model.start_chat(history=[])
@@ -211,14 +205,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-=======
-#def main():
-#    chat_session = model.start_chat(history=[])
-#    # chat_session.send_message(pre_text)
-#    generateSTT("ESTE_BANQUITO", chat_session)
-#
-#
-#
-#if __name__ == "__main__":
-#    main()
->>>>>>> Stashed changes

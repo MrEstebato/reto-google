@@ -1,5 +1,22 @@
 from tkinter import *
 from PIL import Image, ImageTk
+import whatsapp_handling
+
+def read_last_line(file_path):
+    with open(file_path, 'r') as file:
+        # Move the cursor to the end of the file
+        file.seek(0, 2)
+        # Get the current position
+        position = file.tell()
+        # Read lines backwards until we find the last line
+        while position > 0:
+            file.seek(position - 1)
+            if file.read(1) == '\n' and position != 1:  # Check for newline character
+                break
+            position -= 1
+        last_line = file.readline().strip()  # Read the last line
+    return last_line
+
 
 def leerScamValues():
     try:
@@ -66,6 +83,9 @@ def aceptar_llamada(v_main):
         try:
             if(scamCount > 2):
                 rechazar_llamada(v_main)
+                last_message = read_last_line("call_log.txt")
+                print(f"last_message: {last_message}")
+                whatsapp_handling.sendWhatsappMessage("7223892688", f"La llamada ha sido colgada debido a distintos mensajes misteriosos El ultimo fue: {last_message}")
         except:
             pass
 
