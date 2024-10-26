@@ -9,16 +9,11 @@ import google.generativeai as genai
 from load_creds import load_creds
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
-# Ensure pydub finds FFmpeg
-AudioSegment.converter = (
-    "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"
-)
-
+# Variables and configurations
 pre_text = "This is an instruction message. You will receive a conversation only reading the possible scammer's side. Use it to determine whether it is a scam call or a normal call. Return a value from 0 to 100. 0 if not a scam, 100 if it is totally a scam"
-
-creds = load_creds()
-genai.configure(credentials=creds)
-
+AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Ensure pydub finds FFmpeg
+creds = load_creds()  # Load credentials
+genai.configure(credentials=creds)  # Configure credentials
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -29,7 +24,7 @@ generation_config = {
 model = genai.GenerativeModel(
     model_name="tunedModels/scamstuned-ski2920q7evd",
     generation_config=generation_config,
-)
+)  # Use fine-tuned model
 
 
 def generateAudioSample(filename):
@@ -40,7 +35,6 @@ def generateAudioSample(filename):
 
     p = pyaudio.PyAudio()
 
-    # Find the index of the default input device
     default_input_device_index = p.get_default_input_device_info()["index"]
 
     stream = p.open(
@@ -54,7 +48,7 @@ def generateAudioSample(filename):
 
     frames = []
 
-    print(f"Starting Recording {filename}")
+    # print(f"Starting Recording {filename}")
     starting_time = time.time()
 
     # Record audio until 10 seconds or SPACE is pressed again
@@ -112,29 +106,19 @@ def generateSTT(filename, chat_session):
     count = 1
     transcripts = []
 
-<<<<<<< Updated upstream
-    # print("Press SPACE to start recordings")
-    # keyboard.wait("space")
-=======
-    #print("Press SPACE to start recordings")
-    #keyboard.wait("space")
->>>>>>> Stashed changes
     print("Recording... Press SPACE again to stop.")
     time.sleep(0.2)
 
     def process_audio(audio_filename, chat_session):
         nonlocal scam_value_counter
-        # Transcribe el audio a texto
-        text = transcribeAudioToText(audio_filename)
+        text = transcribeAudioToText(audio_filename)  # Transcribe audio to text
         print(f"Transcript for {audio_filename}: {text}")
-
-        # Enviar el texto transcrito como prompt a la API
 
         with open("call_log.txt", "r") as f:
             call_log = f.read()
             text = (call_log + " " + text) if call_log is not None else text
 
-        # print("Sending prompt: ", text)
+        # Send prompt to model
         response = chat_session.send_message(
             text,
             safety_settings={
@@ -148,7 +132,7 @@ def generateSTT(filename, chat_session):
 
         with open("scam_values.txt", "w") as scam_file:
             scam_file.write(f"{scam_value} {scam_value_counter}\n")
-            
+
         print(f"Scam Value: {scam_value}")
         if scam_value >= 80:  # scam value threshhold
             scam_value_counter += 1
@@ -160,7 +144,6 @@ def generateSTT(filename, chat_session):
         # Guardar la respuesta en un archivo o imprimirla
         with open("call_log.txt", "w") as f:
             f.write(f"{text}. ")
-
 
     while True:
         try:
@@ -201,7 +184,6 @@ def generateSTT(filename, chat_session):
 
     return transcripts
 
-<<<<<<< Updated upstream
 
 def main():
     chat_session = model.start_chat(history=[])
@@ -211,14 +193,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-=======
-#def main():
-#    chat_session = model.start_chat(history=[])
-#    # chat_session.send_message(pre_text)
-#    generateSTT("ESTE_BANQUITO", chat_session)
-#
-#
-#
-#if __name__ == "__main__":
-#    main()
->>>>>>> Stashed changes
