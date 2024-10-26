@@ -10,6 +10,7 @@ from pydub.playback import play
 import google.generativeai as genai
 import json
 from load_creds import load_creds
+from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
 # Ensure pydub finds FFmpeg
@@ -111,6 +112,7 @@ def transcribeAudioToText(file_name):
 
 
 def generateSTT(filename, chat_session):
+    scam_value_counter = 0
     count = 1
     transcripts = []
 
@@ -120,26 +122,39 @@ def generateSTT(filename, chat_session):
     time.sleep(0.2)
 
     def process_audio(audio_filename, chat_session):
+        nonlocal scam_value_counter
         # Transcribe el audio a texto
         text = transcribeAudioToText(audio_filename)
         print(f"Transcript for {audio_filename}: {text}")
 
         # Enviar el texto transcrito como prompt a la API
-        response = chat_session.send_message(text)
-        # reason = response_data.get("reason", "Sin información")
+
+        with open("call_log.txt", "r") as f:
+            call_log = f.read()
+            text = (call_log + " " + text) if call_log is not None else text
+
+        # print("Sending prompt: ", text)
+        response = chat_session.send_message(
+            text,
+            safety_settings={
+                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
+                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+            },
+        )
         scam_value = int(response.text) if int(response.text) <= 100 else 100
         print(f"Scam Value: {scam_value}")
+        if scam_value >= 80:  # scam value threshhold
+            scam_value_counter += 1
+        else:
+            scam_value_counter = 0
+        # print(chat_session.history)
         # reason = "Some Reason"
 
         # Guardar la respuesta en un archivo o imprimirla
-        """print(f"Scam Value: {scam_value}, Reason: {reason}")
-        with open("response.json", "w") as f:
-            json.dump(
-                {"scamValue": scam_value, "reason": reason},
-                f,
-                ensure_ascii=False,
-                indent=4,
-            )"""
+        with open("call_log.txt", "w") as f:
+            f.write(f"{text}. ")
 
     while True:
         try:
@@ -160,6 +175,10 @@ def generateSTT(filename, chat_session):
 
             if keyboard.is_pressed("space"):
                 print("STOPPING ALL RECORDINGS")
+                break
+
+            if scam_value_counter == 3:
+                print("Scam detected. Stopping recordings.")
                 break
 
         except KeyboardInterrupt:
