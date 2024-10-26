@@ -3,22 +3,19 @@ import pyaudio
 import keyboard
 import threading
 import time
-import os
 from pydub import AudioSegment
 from io import BytesIO
-from pydub.playback import play
 import google.generativeai as genai
-import json
 from load_creds import load_creds
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
 # Ensure pydub finds FFmpeg
-AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
-
-pre_text = system_instruction = (
-    'You will receive a conversation in phrases, determine whether the conersation conversation is a scam. Use this schema to return a scam value between 0 and 100 and a reason why you think the user is being scammed in spanish: {"scamValue": int, "reason" : str}'
+AudioSegment.converter = (
+    "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"
 )
+
+pre_text = "This is an instruction message. You will receive a conversation only reading the possible scammer's side. Use it to determine whether it is a scam call or a normal call. Return a value from 0 to 100. 0 if not a scam, 100 if it is totally a scam"
 
 creds = load_creds()
 genai.configure(credentials=creds)
@@ -116,8 +113,8 @@ def generateSTT(filename, chat_session):
     count = 1
     transcripts = []
 
-    print("Press SPACE to start recordings")
-    keyboard.wait("space")
+    # print("Press SPACE to start recordings")
+    # keyboard.wait("space")
     print("Recording... Press SPACE again to stop.")
     time.sleep(0.2)
 
@@ -198,7 +195,7 @@ def generateSTT(filename, chat_session):
 
 def main():
     chat_session = model.start_chat(history=[])
-    # chat_session.send_message(pre_text)
+    chat_session.send_message(pre_text)
     generateSTT("ESTE_BANQUITO", chat_session)
 
 
