@@ -15,6 +15,10 @@ from load_creds import load_creds
 # Ensure pydub finds FFmpeg
 AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
 
+pre_text = system_instruction = (
+    'You will receive a conversation in phrases, determine whether the conersation conversation is a scam. Use this schema to return a scam value between 0 and 100 and a reason why you think the user is being scammed in spanish: {"scamValue": int, "reason" : str}'
+)
+
 creds = load_creds()
 genai.configure(credentials=creds)
 
@@ -23,13 +27,11 @@ generation_config = {
     "top_p": 0.95,
     "top_k": 64,
     "max_output_tokens": 8192,
-    "response_mime_type": "application/json",
+    "response_mime_type": "text/plain",
 }
 model = genai.GenerativeModel(
     model_name="tunedModels/scamstuned-ski2920q7evd",
     generation_config=generation_config,
-    # Especificar aqui las instrucciones
-    system_instruction='You will receive a conversation in phrases, determine whether the conersation conversation is a scam. Use this schema to return a scam value between 0 and 100 and a reason why you think the user is being scammed in spanish: {"scamValue": int, "reason" : str}',
 )
 
 
@@ -59,7 +61,7 @@ def generateAudioSample(filename):
     starting_time = time.time()
 
     # Record audio until 10 seconds or SPACE is pressed again
-    while time.time() - starting_time <= 10:
+    while time.time() - starting_time <= 3:
         data = stream.read(chunk)
         frames.append(data)
 
@@ -124,7 +126,7 @@ def generateSTT(filename, chat_session):
 
         # Enviar el texto transcrito como prompt a la API
         response = chat_session.send_message(text)
-        response_data = json.loads(response.text)  # Si la respuesta es JSON, parsearla.
+        response_data = json.loads(response.text)
         scam_value = response_data.get("scamValue", 0)
         reason = response_data.get("reason", "Sin información")
 
@@ -176,6 +178,7 @@ def generateSTT(filename, chat_session):
 
 def main():
     chat_session = model.start_chat(history=[])
+    chat_session.send_message(pre_text, stream=True)
     generateSTT("ESTE_BANQUITO", chat_session)
 
 
