@@ -9,15 +9,15 @@ from io import BytesIO
 from pydub.playback import play
 import google.generativeai as genai
 import json
-import google.generativeai as genai
+from load_creds import load_creds
 
 
 # Ensure pydub finds FFmpeg
 AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
 
-# API SETUP ==============================================================
-# GEMINI API
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+creds = load_creds()
+genai.configure(credentials=creds)
+
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -26,7 +26,7 @@ generation_config = {
     "response_mime_type": "application/json",
 }
 model = genai.GenerativeModel(
-    model_name="gemini-1.5-flash",
+    model_name="tunedModels/scamstuned-ski2920q7evd",
     generation_config=generation_config,
     # Especificar aqui las instrucciones
     system_instruction='You will receive a conversation in phrases, determine whether the conersation conversation is a scam. Use this schema to return a scam value between 0 and 100 and a reason why you think the user is being scammed in spanish: {"scamValue": int, "reason" : str}',
@@ -83,12 +83,12 @@ def generateAudioSample(filename):
     print(f"Audio saved as {mp3_filename}")
 
 
-def transcribeAudioToTxt(file_name):
-
-    client = speech.SpeechClient.from_service_account_file("key.json")
+def transcribeAudioToText(file_name):
+    # Autenticación OAuth
+    creds = load_creds()
+    client = speech.SpeechClient(credentials=creds)
 
     with open(file_name, "rb") as file:
-
         mp3_data = file.read()
 
     audio_file = speech.RecognitionAudio(content=mp3_data)
@@ -119,19 +119,24 @@ def generateSTT(filename, chat_session):
 
     def process_audio(audio_filename, chat_session):
         # Transcribe el audio a texto
-        text = transcribeAudioToTxt(audio_filename)
+        text = transcribeAudioToText(audio_filename)
         print(f"Transcript for {audio_filename}: {text}")
-    
+
         # Enviar el texto transcrito como prompt a la API
         response = chat_session.send_message(text)
         response_data = json.loads(response.text)  # Si la respuesta es JSON, parsearla.
         scam_value = response_data.get("scamValue", 0)
         reason = response_data.get("reason", "Sin información")
-    
+
         # Guardar la respuesta en un archivo o imprimirla
         print(f"Scam Value: {scam_value}, Reason: {reason}")
         with open("response.json", "w") as f:
-            json.dump({"scamValue": scam_value, "reason": reason}, f, ensure_ascii=False, indent=4)
+            json.dump(
+                {"scamValue": scam_value, "reason": reason},
+                f,
+                ensure_ascii=False,
+                indent=4,
+            )
 
     while True:
         try:
