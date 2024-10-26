@@ -1,6 +1,8 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import funciones as func
+import os
+import threading
 
 # Crear la ventana principal
 v_main = Tk()
@@ -36,16 +38,21 @@ reject_photo = ImageTk.PhotoImage(reject_img)
 accept_button = canvas.create_image(220, 500, image=accept_photo)
 reject_button = canvas.create_image(80, 500, image=reject_photo)
 
-# Función para manejar el clic en los botones
+# Define the function to start the external script
+def start_call_script():
+    os.system("python callia.py")
+    v_main.quit()  # Close the main Tkinter window once the thread ends
+
+# Function to handle button clicks
 def on_button_click(event):
     x, y = event.x, event.y
-    # Verificar si el clic fue dentro de algún botón
     if accept_button in canvas.find_overlapping(x-32, y-32, x+32, y+32):
-        func.aceptar_llamada(v_main)  # Pasar la ventana
+        func.aceptar_llamada(v_main)
+        threading.Thread(target=start_call_script).start()  # Start in a separate thread
     elif reject_button in canvas.find_overlapping(x-32, y-32, x+32, y+32):
-        func.rechazar_llamada(v_main)  # Pasar la ventana
+        func.rechazar_llamada(v_main)
 
-# Vincular la función al evento de clic en el canvas
+# Bind the click event to the canvas
 canvas.bind("<Button-1>", on_button_click)
 
 v_main.mainloop()
