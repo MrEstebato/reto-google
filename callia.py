@@ -61,7 +61,7 @@ def generateAudioSample(filename):
     starting_time = time.time()
 
     # Record audio until 10 seconds or SPACE is pressed again
-    while time.time() - starting_time <= 3:
+    while time.time() - starting_time <= 10:
         data = stream.read(chunk)
         frames.append(data)
 
@@ -82,7 +82,7 @@ def generateAudioSample(filename):
     # Export to MP3
     mp3_filename = f"{filename}.mp3"
     audio_segment.export(mp3_filename, format="mp3")
-    print(f"Audio saved as {mp3_filename}")
+    # print(f"Audio saved as {mp3_filename}")
 
 
 def transcribeAudioToText(file_name):
@@ -126,19 +126,20 @@ def generateSTT(filename, chat_session):
 
         # Enviar el texto transcrito como prompt a la API
         response = chat_session.send_message(text)
-        response_data = json.loads(response.text)
-        scam_value = response_data.get("scamValue", 0)
-        reason = response_data.get("reason", "Sin información")
+        # reason = response_data.get("reason", "Sin información")
+        scam_value = int(response.text) if int(response.text) <= 100 else 100
+        print(f"Scam Value: {scam_value}")
+        # reason = "Some Reason"
 
         # Guardar la respuesta en un archivo o imprimirla
-        print(f"Scam Value: {scam_value}, Reason: {reason}")
+        """print(f"Scam Value: {scam_value}, Reason: {reason}")
         with open("response.json", "w") as f:
             json.dump(
                 {"scamValue": scam_value, "reason": reason},
                 f,
                 ensure_ascii=False,
                 indent=4,
-            )
+            )"""
 
     while True:
         try:
@@ -178,7 +179,7 @@ def generateSTT(filename, chat_session):
 
 def main():
     chat_session = model.start_chat(history=[])
-    chat_session.send_message(pre_text, stream=True)
+    # chat_session.send_message(pre_text)
     generateSTT("ESTE_BANQUITO", chat_session)
 
 
