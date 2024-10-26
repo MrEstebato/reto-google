@@ -1,0 +1,100 @@
+ ,Información ,Referencia  
+Entidades Bancarias,Hemos detectado actividad sospechosa en su cuenta. Necesitamos confirmación.,60
+Entidades Bancarias,Su cuenta ha sido bloqueada temporalmente. Proporcione su información para desbloquearla.,72
+Entidades Bancarias,"Para evitar cargos adicionales, necesitamos verificar su identidad.",75
+Entidades Bancarias,Hemos notado un intento de acceso no autorizado a su cuenta.,20
+Entidades Bancarias,"Por favor, confirme su número de tarjeta y PIN para asegurar su cuenta.",90
+Entidades Bancarias,Su saldo es inusualmente bajo. Necesitamos hablar sobre esto.,60
+Entidades Bancarias,Estamos realizando una auditoría de cuentas y requerimos su información.,40
+Entidades Bancarias,"Si no responde ahora, su cuenta podría ser cerrada.",70
+Entidades Bancarias,Recibimos un aviso de fraude en su cuenta. Actúe rápidamente.,30
+Entidades Bancarias,"Para proteger su cuenta, necesitamos que cambie su contraseña ahora.",52
+Entidades Bancarias,"Hemos enviado un código de verificación a su teléfono; por favor, confírmelo.",85
+Entidades Bancarias,"Su solicitud de préstamo ha sido aprobada, pero necesitamos más información.",60
+Entidades Bancarias,"Si no actualiza sus datos, perderá el acceso a su cuenta.",30
+Entidades Bancarias,Estamos investigando transacciones inusuales en su cuenta.,10
+Entidades Bancarias,"Por motivos de seguridad, necesitamos que confirme su dirección actual.",73
+Entidades Bancarias,"Hemos detectado un problema con su tarjeta; por favor, proporcione el número completo.",85
+Entidades Bancarias,"Para evitar problemas legales, es urgente que nos llame de inmediato.",90
+Entidades Bancarias,Su tarjeta ha sido comprometida; necesitamos que la cancele ahora.,20
+Entidades Bancarias,Se ha producido un problema con su cuenta de tarjeta de crédito y necesitamos verificar su información para evitar cargos no autorizados,60
+Entidades Bancarias,Estamos enviando un nuevo dispositivo de seguridad; confirme su dirección para el envío.,70
+Entidades Bancarias,"Si no actúa ahora, podría perder todos sus fondos.",86
+Servicio Técnico,Necesitamos acceso remoto a su dispositivo para solucionar el problema ahora mismo.,95
+Servicio Técnico,Hemos detectado actividad inusual en su red y necesitamos verificarla,15
+Servicio Técnico,Su suscripción está a punto de caducar; proporcione sus datos para renovarla.,81
+Servicio Técnico,"Hemos enviado un código a su teléfono; por favor, confírmelo para continuar",78
+Servicio Técnico,"Para mejorar la seguridad de su red, necesitamos que cambie ciertas configuraciones.",55
+Servicio Técnico,Hemos detectado múltiples intentos de acceso no autorizado a su cuenta técnica.,14
+Servicio Técnico,"Por motivos de seguridad, le pedimos que verifique sus datos personales ahora mismo",70
+Servicio Técnico,Somos un proveedor de servicios de Internet y hemos detectado un problema con su conexión. Necesitamos algunos datos suyos para solucionarlo,79
+Luz y Gas,"Su cuenta tiene un saldo pendiente; si no paga ahora, cortaremos el servicio.",50
+Luz y Gas,Estamos realizando una verificación y hemos encontrado irregularidades en sus pagos.,5
+Luz y Gas,"Para evitar cortes de luz/gas, necesita transferir una cantidad inmediatamente.",88
+Luz y Gas,Hemos recibido una queja sobre impagos en su cuenta; actúe rápido para solucionarlo.,50
+Luz y Gas,"Si no confirma este pago hoy, podría enfrentarse a un corte inmediato del servicio.",63
+Luz y Gas,Estamos enviando a un técnico; necesita pagar antes de la visita para evitar cargos adicionales.,90
+Luz y Gas,Su suministro está en riesgo debido a impagos; transfiera dinero para restaurar el servicio.,65
+Luz y Gas,Le llamamos porque hay un problema urgente con su suministro energético.,20
+Luz y Gas,Necesitamos verificar sus datos antes de proceder con la reconexión del servicio.,17
+Luz y Gas,"Si no responde pronto, se le aplicarán cargos por reconexión.",50
+Luz y Gas,Hemos detectado un uso excesivo y necesitamos discutirlo con usted.,8
+Luz y Gas,"Por favor, confirme esta información o se verá afectado por cortes.",60
+Luz y Gas,Estamos realizando auditorías y necesitamos acceder a sus datos personales.,87
+Luz y Gas,"Si desea recibir asistencia inmediata, debe confirmar esta información.",59
+Luz y Gas,Su factura está atrasada; transfiera dinero inmediatamente para evitar acciones legales.,85
+Luz y Gas,Estamos aquí para ayudarle a resolver este problema antes del corte.,80
+Luz y Gas,"Para asegurar la continuidad del servicio, es necesario que confirme este pago.",90
+Luz y Gas,Puede calificar para reembolsos adicionales si proporciona estos datos rápidamente.,85
+Luz y Gas,Hay un error en nuestros registros relacionados con usted que necesita ser corregido,79
+Empresas de Seguridad Informática,"Señora, le llamo de su compañía de antivirus. Hemos detectado una amenaza grave en su computadora que podría poner en riesgo sus fotos familiares",90
+Empresas de Seguridad Informática,"Tenemos un nuevo programa que protegerá su ordenador de los virus malos. Es muy fácil de usar, solo tiene que abrir el mensaje que le mandamos",95
+Empresas de Seguridad Informática,Soy su técnico de confianza y quiero asegurarme de que su computadora esté segura. Le ofrezco una revisión gratuita de su sistema,85
+Préstamos e Inversiones,Tenemos una excelente noticia para usted. Hemos aprobado un préstamo de [monto] a su nombre,90
+Préstamos e Inversiones,Tenemos una oportunidad de inversión única que le permitirá duplicar su dinero en poco tiempo,95
+Préstamos e Inversiones,Esta oferta es exclusiva para nuestros clientes más selectos,80
+Préstamos e Inversiones,"Para formalizar el préstamo, necesitamos que nos confirme su número de seguro social y los últimos cuatro dígitos de su tarjeta de crédito",90
+Préstamos e Inversiones,Ofrecemos una inversión garantizada que duplicará su dinero en poco tiempo.,95
+Préstamos e Inversiones,Puede condonar todas sus deudas si invierte una pequeña cantidad ahora mismo.,90
+Préstamos e Inversiones,Esta es una oportunidad única: miles de pesos por solo unos pocos cientos,85
+Préstamos e Inversiones,“No hay riesgos involucrados: ¡es completamente seguro invertir con nosotros,90
+Préstamos e Inversiones,"Para procesar su solicitud, requerimos un pago inicial de [monto] para cubrir los gastos administrativos",85
+Préstamos e Inversiones,"Esta oportunidad es limitada, debe invertir ahora mismo antes de que se agoten los fondos",90
+Préstamos e Inversiones,"Si no realiza este pago, podría enfrentar acciones legales por incumplimiento de contrato",75
+Seguridad Social o Hacienda,"Tenemos buenas noticias, tiene un reembolso pendiente de la Seguridad Social. Solo necesitamos verificar algunos datos",80
+Seguridad Social o Hacienda,Su número de seguro social ha sido comprometido y necesitamos que nos proporcione su información para proteger su cuenta,90
+Seguridad Social o Hacienda,"Tiene un adeudo pendiente con Hacienda. Si no realiza el pago inmediato, enfrentará consecuencias legales",88
+Seguridad Social o Hacienda,Ha sido seleccionado para una auditoría fiscal. Necesitamos que nos proporcione su información financiera,83
+Seguridad Social o Hacienda,"Tenemos un reembolso de impuestos para usted, pero necesitamos verificar su información bancaria",85
+Familiares en peligro,¡Ayuda! Soy tu hijo/a y estoy en un gran problema.,94
+Familiares en peligro,He tenido un accidente y necesito que me envíes dinero urgentemente.,90
+Familiares en peligro,"No puedo hablar mucho, pero estoy en una situación crítica.",41
+Familiares en peligro,"Por favor, no le digas a nadie; esto es un asunto privado.",70
+Familiares en peligro,Estoy siendo detenido y necesito que pagues una fianza ahora mismo.,30
+Familiares en peligro,Me lastimé y no tengo forma de llegar a casa; necesito tu ayuda.,46
+Familiares en peligro,He sido víctima de un robo y necesito dinero para salir de aquí.,70
+Familiares en peligro,"No tengo tiempo para explicarte; simplemente envía el dinero, por favor.",60
+Familiares en peligro,Estoy en el hospital y no puedo comunicarme bien; ayúdame.,40
+Familiares en peligro,"Es muy urgente; no puedo hablar mucho por teléfono, pero confía en mi",80
+,"Hola soy tu vecino, no tengo azúcar, se me olvidó comprar. Me podrías regalar un poco?",0
+,"Hola abuela, cómo te sientes después de la operación?",0
+,Este es solo un mensaje informativo. No es necesario hacer nada en este momento,0
+,Llamamos para recordarle que su cuenta está activa y en orden. No requiere acción,0
+,Nos alegra informarle que todo está funcionando correctamente en su cuenta,0
+,Le recordamos que sus servicios están al día. Gracias por su confianza en nosotros,0
+,Este es un recordatorio de su cita médica programada para el 10 de noviembre a las 3:00 PM.,0
+,Le recordamos que siempre puede llamarnos a nuestro número oficial si tiene dudas,0
+,No olvide su cita para el servicio de mantenimiento del automóvil el próximo martes.,0
+,Queríamos saber si tiene alguna pregunta. Estamos aquí para ayudarle,0
+,¿Cómo te va hoy? Me gustaría saber qué tal te ha ido esta semana,0
+,Estamos organizando una reunión familiar y queríamos que vinieras. Te extrañamos,0
+,"Quería recordarte que siempre estoy aquí si necesitas algo, no dudes en llamar",0
+,¿Te gustaría que pasara a visitarte este fin de semana? Me encantaría verte,0
+,"Hola, soy [tu nombre] de [nombre de la empresa]. Espero que sea un buen momento para hablar.",0
+,¿Te puedo echar una mano con eso?,0
+,¿Te gustaría salir a tomar algo?,0
+,¿Cómo van tus nietos?,0
+,Tenemos una oferta especial para usted. quisiera escucharla?,2
+,Necesitamos actualizar su información de contacto,45
+,Su tarjeta ha sido bloqueada por razones de seguridad,50
+,Tenemos un regalo especial para usted por ser nuestro cliente,55
