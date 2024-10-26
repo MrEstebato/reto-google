@@ -14,7 +14,7 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 
 # Ensure pydub finds FFmpeg
-AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
+AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
 
 pre_text = system_instruction = (
     'You will receive a conversation in phrases, determine whether the conersation conversation is a scam. Use this schema to return a scam value between 0 and 100 and a reason why you think the user is being scammed in spanish: {"scamValue": int, "reason" : str}'
