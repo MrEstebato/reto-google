@@ -11,12 +11,13 @@ import google.generativeai as genai
 import json
 import google.generativeai as genai
 
+
 # Ensure pydub finds FFmpeg
 AudioSegment.converter = "C:/Program Files/ffmpeg-master-latest-win64-gpl/bin/ffmpeg.exe"  # Update path if necessary
 
 # API SETUP ==============================================================
 # GEMINI API
-genai.configure(api_key="AIzaSyDapeWfBoIaJHEU5ElASDhUnuJaafaEGRc")  # Esteban
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 generation_config = {
     "temperature": 1,
     "top_p": 0.95,
@@ -116,13 +117,21 @@ def generateSTT(filename, chat_session):
     print("Recording... Press SPACE again to stop.")
     time.sleep(0.2)
 
-    def process_audio(audio_filename):
+    def process_audio(audio_filename, chat_session):
+        # Transcribe el audio a texto
         text = transcribeAudioToTxt(audio_filename)
-        transcripts.append(text)
         print(f"Transcript for {audio_filename}: {text}")
+    
+        # Enviar el texto transcrito como prompt a la API
+        response = chat_session.send_message(text)
+        response_data = json.loads(response.text)  # Si la respuesta es JSON, parsearla.
+        scam_value = response_data.get("scamValue", 0)
+        reason = response_data.get("reason", "Sin información")
+    
+        # Guardar la respuesta en un archivo o imprimirla
+        print(f"Scam Value: {scam_value}, Reason: {reason}")
         with open("response.json", "w") as f:
-            response = chat_session.send_message(text)
-            f.write(response.text)
+            json.dump({"scamValue": scam_value, "reason": reason}, f, ensure_ascii=False, indent=4)
 
     while True:
         try:
@@ -134,7 +143,7 @@ def generateSTT(filename, chat_session):
                 previous_filename = f"{filename}{count-1}.mp3"
                 thread = threading.Thread(
                     target=process_audio,
-                    args=(previous_filename,),
+                    args=(previous_filename, chat_session),
                 )
                 thread.start()
 
