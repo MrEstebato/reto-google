@@ -16,11 +16,3 @@ def sendWhatsappMessage(phone_number, msg):
     response = requests.post(url, json=payload, headers=headers)
 
     print(response.text.encode('utf8'))
-
-
-#def main():
-#    for i in range(1,6):
-#        sendWhatsappMessage('7223892688', f"Esteban la chupa {i}")
-#
-#if __name__ == "__main__":
-#    main()
