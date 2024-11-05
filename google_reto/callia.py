@@ -188,7 +188,7 @@ def generateSTT(filename, chat_session):
 def main():
     chat_session = model.start_chat(history=[])
     chat_session.send_message(pre_text)
-    generateSTT("ESTE_BANQUITO", chat_session)
+    generateSTT("audio", chat_session)
 
 
 if __name__ == "__main__":
