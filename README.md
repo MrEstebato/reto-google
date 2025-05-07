@@ -61,3 +61,7 @@ Customize the model parameters and generation settings in `generation_config`. A
 ## Note
 
 This application assumes a pre-trained model located at `tunedModels/scamstuned-ski2920q7evd`. Replace this path if needed to match your model’s location.
+
+## Presentation Link
+
+https://www.canva.com/design/DAGUoSpuql4/k9RItfcl1lxyw4LikF6sDA/view?utm_content=DAGUoSpuql4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hbea4af59e7
